@@ -45,3 +45,9 @@ async def get_sensors(skip: int = 0, limit: int = 10, db: Session = Depends(get_
 async def read_index():
     with open("./static/templates/index.html") as f:
         return HTMLResponse(content=f.read(), status_code=200)
+
+
+@app.get("/actuator", response_class=HTMLResponse)
+async def read_index():
+    with open("./static/templates/actuator.html") as f:
+        return HTMLResponse(content=f.read(), status_code=200)

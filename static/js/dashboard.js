@@ -4,9 +4,11 @@ function createCard(sensor) {
     card.className = 'bg-white p-4 rounded-lg shadow-md';
     card.innerHTML = `
         <h2 class="text-xl font-bold mb-2">Sensor: ${sensor.sensor}</h2>
-        <p>API Key: ${sensor.api_key}</p>
         <p>Temperature: ${sensor.temperature}°C</p>
-        <p>Humidity: ${sensor.humidity}%</p>
+        <p>Light: ${sensor.light}%</p>
+        <p>Distance: ${sensor.distance}</p>
+        <p>Date: ${sensor.date}</p>
+        <p>Time: ${sensor.time}</p>
     `;
     return card;
 }
