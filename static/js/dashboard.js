@@ -1,9 +1,9 @@
 // Function to create a card element
-function createCard(sensor) {
+function createCard(sensor, isNewest = false) {
     const card = document.createElement('div');
-    card.className = 'bg-white p-4 rounded-lg shadow-md';
+    card.className = isNewest ? 'bg-white p-24 rounded-lg shadow-md text-center text-2xl' : 'bg-white p-4 rounded-lg shadow-md';
     card.innerHTML = `
-        <h2 class="text-xl font-bold mb-2">Sensor: ${sensor.sensor}</h2>
+        <h3 class="${isNewest ? 'text-2xl' : 'text-xl'} font-bold mb-2">Sensor: ${sensor.sensor}</h3>
         <p>Temperature: ${sensor.temperature}°C</p>
         <p>Light: ${sensor.light}%</p>
         <p>Distance: ${sensor.distance}</p>
@@ -36,10 +36,24 @@ async function initDashboard() {
 
     function renderDashboard(filteredData) {
         dashboard.innerHTML = '';
-        filteredData.forEach(sensor => {
-            const card = createCard(sensor);
-            dashboard.appendChild(card);
-        });
+
+        if (filteredData.length > 0) {
+            const newestSensor = filteredData[0];
+            const newestCard = createCard(newestSensor, true);
+            const newestWrapper = document.createElement('div');
+            newestWrapper.className = 'flex justify-center mb-4';
+            newestWrapper.appendChild(newestCard);
+            dashboard.appendChild(newestWrapper);
+
+            const otherSensors = filteredData.slice(1);
+            const gridWrapper = document.createElement('div');
+            gridWrapper.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4';
+            otherSensors.forEach(sensor => {
+                const card = createCard(sensor);
+                gridWrapper.appendChild(card);
+            });
+            dashboard.appendChild(gridWrapper);
+        }
     }
 
     renderDashboard(data);
