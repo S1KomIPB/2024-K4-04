@@ -5,11 +5,13 @@ from . import models, schemas
 
 def create_sensor_data(db: Session, sensor_data: schemas.SensorData):
     db_sensor_data = models.SensorDataDB(
-        timestamp = datetime.now(),
         api_key=sensor_data.api_key,
         sensor=sensor_data.sensor,
         temperature=sensor_data.temperature,
-        humidity=sensor_data.humidity
+        light=sensor_data.light,
+        date=sensor_data.date,
+        time=sensor_data.time,
+        distance=sensor_data.distance
     )
     db.add(db_sensor_data)
     db.commit()

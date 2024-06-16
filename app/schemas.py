@@ -5,4 +5,8 @@ class SensorData(BaseModel):
     api_key: str
     sensor: str
     temperature: float
-    humidity: float
+    light: float
+    date: str
+    time: str
+    distance: float
+
