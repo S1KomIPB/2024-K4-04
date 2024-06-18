@@ -16,7 +16,7 @@ function createCard(sensor) {
 // Function to fetch sensor data from the API
 async function fetchSensorData() {
     try {
-        const response = await fetch('/get');
+        const response = await fetch('/get?limit=50');
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
@@ -95,10 +95,10 @@ async function initDashboard() {
             const otherSensors = filteredData.slice(1);
 
             // Extract data for charts
-            const labels = otherSensors.map(sensor => sensor.time);
-            const temperatureData = otherSensors.map(sensor => sensor.temperature);
-            const lightData = otherSensors.map(sensor => sensor.light);
-            const distanceData = otherSensors.map(sensor => sensor.distance);
+            const labels = otherSensors.map(sensor => sensor.time).reverse();
+            const temperatureData = otherSensors.map(sensor => sensor.temperature).reverse();
+            const lightData = otherSensors.map(sensor => sensor.light).reverse();
+            const distanceData = otherSensors.map(sensor => sensor.distance).reverse();
 
             // Create a container for the charts
             const chartsContainer = document.createElement('div');
