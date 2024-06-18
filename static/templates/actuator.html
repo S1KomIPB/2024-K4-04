@@ -7,11 +7,17 @@
     <link href="./static/css/output.css" rel="stylesheet">
 </head>
 <body>
-    <div class="flex flex-column justify-center">
-        <label class="mx-2" for="ipAddress">Enter IP Address:</label>
-        <input type="text" id="ipAddress" placeholder="192.168.208.91">
-        <div><button id="ledOn">Turn LED On</button></div>
-        <div><button id="ledOff">Turn LED Off</button></div>
+    <div class="flex flex-col items-center">
+        <div class="flex self-center my-2">
+            <label class="mx-2" for="ipAddress">Enter IP Address:</label>
+            <input type="text" id="ipAddress" placeholder="192.168.208.91">
+        </div>
+        <div class="flex-1 justify-center my-2">
+            <button class="select-none rounded-lg bg-gray-900 py-3 px-6 text-center align-middle text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button" id="ledOn">Turn LED On</button>
+            <button class="px-6 py-3 text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+            type="button" id="ledOff">Turn LED Off</button>
+        </div>
         <div id="content"></div>
     </div>
 
