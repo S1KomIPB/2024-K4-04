@@ -1,9 +1,16 @@
 // Function to create a card element
 function createCard(sensor, isNewest = false) {
     const card = document.createElement('div');
-    card.className = isNewest ? 'bg-white p-24 rounded-lg shadow-md text-center text-2xl' : 'bg-white p-4 rounded-lg shadow-md';
-    card.innerHTML = `
-        <h3 class="${isNewest ? 'text-2xl' : 'text-xl'} font-bold mb-2">Sensor: ${sensor.sensor}</h3>
+    card.className = isNewest ? 'bg-white px-12 py-6 rounded-lg shadow-md text-center text-2xl' : 'bg-white p-4 rounded-lg shadow-md';
+    card.innerHTML = isNewest ? `
+        <h3 class="text-2xl font-bold mb-2">Latest</h3>
+        <p>Temperature: ${sensor.temperature}°C</p>
+        <p>Light: ${sensor.light}%</p>
+        <p>Distance: ${sensor.distance}</p>
+        <p>Date: ${sensor.date}</p>
+        <p>Time: ${sensor.time}</p>
+    ` : `
+        <h3 class="text-xl font-bold mb-2">Sensor: ${sensor.sensor}</h3>
         <p>Temperature: ${sensor.temperature}°C</p>
         <p>Light: ${sensor.light}%</p>
         <p>Distance: ${sensor.distance}</p>
