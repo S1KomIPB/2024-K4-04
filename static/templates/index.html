@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IoT Dashboard</title>
     <link href="./static/css/output.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-100">
     <div class="container flex flex-col justify-center mx-12 p-4">
@@ -15,6 +16,8 @@
         <div id="dashboard">
             <!-- Dynamic content will be inserted here -->
         </div>
+
+        <canvas id="sensorChart" width="400" height="200"></canvas>
     </div>
 
     <script src="./static/js/dashboard.js"></script>
