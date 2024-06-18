@@ -16,7 +16,7 @@ function createCard(sensor) {
 // Function to fetch sensor data from the API
 async function fetchSensorData() {
     try {
-        const response = await fetch('/get?limit=50');
+        const response = await fetch('/get?limit=50'); // Removed the limit parameter
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
@@ -85,6 +85,7 @@ async function initDashboard() {
         dashboard.innerHTML = '';
 
         if (filteredData.length > 0) {
+            // Latest data section
             const newestSensor = filteredData[0];
             const newestCard = createCard(newestSensor);
             const newestWrapper = document.createElement('div');
@@ -100,36 +101,54 @@ async function initDashboard() {
             const lightData = otherSensors.map(sensor => sensor.light).reverse();
             const distanceData = otherSensors.map(sensor => sensor.distance).reverse();
 
-            // Create a container for the charts
+            // Add Charts title
+            const chartsTitle = document.createElement('div');
+            chartsTitle.className = 'text-4xl font-bold mb-4 text-center';
+            chartsTitle.textContent = 'Charts';
+            dashboard.appendChild(chartsTitle);
+
+            // Graph section
             const chartsContainer = document.createElement('div');
             chartsContainer.className = 'flex flex-row justify-between mb-8';
 
             // Create temperature chart
             const tempCanvasWrapper = document.createElement('div');
-            tempCanvasWrapper.className = 'flex-1';
+            tempCanvasWrapper.className = 'flex-1 text-center';
+            const tempChartTitle = document.createElement('h4');
+            tempChartTitle.className = 'text-2xl font-bold mb-2';
+            tempChartTitle.textContent = 'Temperature';
             const tempCanvas = document.createElement('canvas');
             tempCanvas.id = 'temperatureChart';
             const tempCtx = tempCanvas.getContext('2d');
+            tempCanvasWrapper.appendChild(tempChartTitle);
             tempCanvasWrapper.appendChild(tempCanvas);
             chartsContainer.appendChild(tempCanvasWrapper);
             createChart(tempCtx, labels, temperatureData, 'Temperature', 'Temperature (°C)', 'rgba(255, 99, 132, 0.2)', 'rgba(255, 99, 132, 1)');
 
             // Create light chart
             const lightCanvasWrapper = document.createElement('div');
-            lightCanvasWrapper.className = 'flex-1';
+            lightCanvasWrapper.className = 'flex-1 text-center';
+            const lightChartTitle = document.createElement('h4');
+            lightChartTitle.className = 'text-2xl font-bold mb-2';
+            lightChartTitle.textContent = 'Light';
             const lightCanvas = document.createElement('canvas');
             lightCanvas.id = 'lightChart';
             const lightCtx = lightCanvas.getContext('2d');
+            lightCanvasWrapper.appendChild(lightChartTitle);
             lightCanvasWrapper.appendChild(lightCanvas);
             chartsContainer.appendChild(lightCanvasWrapper);
             createChart(lightCtx, labels, lightData, 'Light', 'Light (%)', 'rgba(54, 162, 235, 0.2)', 'rgba(54, 162, 235, 1)');
 
             // Create distance chart
             const distanceCanvasWrapper = document.createElement('div');
-            distanceCanvasWrapper.className = 'flex-1';
+            distanceCanvasWrapper.className = 'flex-1 text-center';
+            const distanceChartTitle = document.createElement('h4');
+            distanceChartTitle.className = 'text-2xl font-bold mb-2';
+            distanceChartTitle.textContent = 'Distance';
             const distanceCanvas = document.createElement('canvas');
             distanceCanvas.id = 'distanceChart';
             const distanceCtx = distanceCanvas.getContext('2d');
+            distanceCanvasWrapper.appendChild(distanceChartTitle);
             distanceCanvasWrapper.appendChild(distanceCanvas);
             chartsContainer.appendChild(distanceCanvasWrapper);
             createChart(distanceCtx, labels, distanceData, 'Distance', 'Distance', 'rgba(75, 192, 192, 0.2)', 'rgba(75, 192, 192, 1)');
@@ -137,7 +156,13 @@ async function initDashboard() {
             // Append the charts container to the dashboard
             dashboard.appendChild(chartsContainer);
 
-            // Now create and append the table
+            // Add Graphs title
+            const tableTitle = document.createElement('div');
+            tableTitle.className = 'text-4xl font-bold mb-4 text-center';
+            tableTitle.textContent = 'History Table';
+            dashboard.appendChild(tableTitle);
+
+            // Table section
             const tableWrapper = document.createElement('div');
             tableWrapper.className = 'mb-8';
 
@@ -172,7 +197,13 @@ async function initDashboard() {
 
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.toLowerCase();
-        const filteredData = data.filter(sensor => sensor.sensor.toLowerCase().includes(query));
+        const filteredData = data.filter(sensor => 
+            sensor.date.toLowerCase().includes(query) || 
+            sensor.time.toLowerCase().includes(query) || 
+            sensor.temperature.toString().toLowerCase().includes(query) || 
+            sensor.light.toString().toLowerCase().includes(query) || 
+            sensor.distance.toString().toLowerCase().includes(query)
+        );
         renderDashboard(filteredData);
     });
 }

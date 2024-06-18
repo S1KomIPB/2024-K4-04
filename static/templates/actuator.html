@@ -7,11 +7,13 @@
     <link href="./static/css/output.css" rel="stylesheet">
 </head>
 <body>
-    <label for="ipAddress">Enter IP Address:</label>
-    <input type="text" id="ipAddress" placeholder="192.168.208.91">
-    <button id="ledOn">Turn LED On</button>
-    <button id="ledOff">Turn LED Off</button>
-    <div id="content"></div>
+    <div class="flex flex-column justify-center">
+        <label class="mx-2" for="ipAddress">Enter IP Address:</label>
+        <input type="text" id="ipAddress" placeholder="192.168.208.91">
+        <div><button id="ledOn">Turn LED On</button></div>
+        <div><button id="ledOff">Turn LED Off</button></div>
+        <div id="content"></div>
+    </div>
 
     <script src="./static/js/actuator.js"></script>
 </body>
