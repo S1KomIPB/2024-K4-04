@@ -1,20 +1,20 @@
 # Capstone ESP monitoring api
 
 ### Struktur Program
-- `./esp32-code/` -> kode yang dijalankan di ESP32 untuk connect ke server
-- `./main.py` -> kode yang dijalankan server
+- `esp32-code/` -> kode yang dijalankan di ESP32 untuk connect ke server
+- `app/main.py` -> kode yang dijalankan server
 
 ### Instalasi (linux)
 ```
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-
+npm i
 ```
 
 ### Menjalankan program
 **Server**
-- jalankan `uvicorn main:app --host 0.0.0.0 --reload`
+- jalankan `uvicorn app.main:app --host 0.0.0.0 --reload`
 - catatan: `--host 0.0.0.0` menerima koneksi dari IP mana saja (tidak aman)
 
 **ESP32**
